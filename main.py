@@ -1,11 +1,12 @@
 # 13 Jul 2025
 
+import sys
 from stats import get_words_count
 from stats import get_char_count
 from stats import get_sort_char_count
 
 def main():
-    path = "books/frankenstein.txt"
+    path = sys.argv[1]
     book = get_book_text(path)
     words_count = get_words_count(book)
     char_count_dict = get_char_count(book)
@@ -18,7 +19,7 @@ def main():
     print("--------- Character Count -------")
     show_char_count(sort_char_count)
     print("============= END ===============")
-
+        
 
 def get_book_text(file_path):
     with open (file_path) as f:
@@ -30,5 +31,8 @@ def show_char_count (sorted_char_count):
             print(f"{sorted_char_count[i]['char']}: {sorted_char_count[i]['num']}")
 
 
-
-main()
+if len(sys.argv) == 2 :
+    main()
+else :
+    print("Usage: python3 main.py <path_to_book>")
+    sys.exit(1)

@@ -1,22 +1,34 @@
 # 13 Jul 2025
 
 from stats import get_words_count
-
 from stats import get_char_count
+from stats import get_sort_char_count
 
 def main():
-
-    book = get_book_text("books/frankenstein.txt")
+    path = "books/frankenstein.txt"
+    book = get_book_text(path)
     words_count = get_words_count(book)
-    alphabet_count = get_char_count(book)
+    char_count_dict = get_char_count(book)
+    sort_char_count = get_sort_char_count(char_count_dict)
 
-    # print(book)
-    print(f"{words_count} words found in the document")
-    print(alphabet_count)
-    
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {path}...")
+    print("----------- Word Count ----------")
+    print(f"Found {words_count} total words")
+    print("--------- Character Count -------")
+    show_char_count(sort_char_count)
+    print("============= END ===============")
+
 
 def get_book_text(file_path):
     with open (file_path) as f:
         return f.read()
+
+def show_char_count (sorted_char_count):
+    for i in range (len(sorted_char_count)):
+        if sorted_char_count[i]['char'].isalpha() :
+            print(f"{sorted_char_count[i]['char']}: {sorted_char_count[i]['num']}")
+
+
 
 main()
